@@ -1,0 +1,194 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Surprise</title>
+
+<style>
+body{
+font-family: Arial;
+text-align:center;
+background:linear-gradient(45deg,#ff9a9e,#fad0c4);
+color:white;
+padding:40px;
+overflow:hidden;
+}
+
+/* butterflies */
+.butterfly{
+position:absolute;
+font-size:30px;
+animation:fly 10s linear infinite;
+}
+
+@keyframes fly{
+0%{transform:translateY(100vh) translateX(0);}
+100%{transform:translateY(-10vh) translateX(100vw);}
+}
+
+/* panda */
+.panda{
+font-size:60px;
+animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-20px);}
+}
+
+/* balloons */
+.balloon{
+position:absolute;
+font-size:35px;
+animation:float 8s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);}
+100%{transform:translateY(-10vh);}
+}
+
+button{
+padding:12px 25px;
+margin:10px;
+font-size:18px;
+border:none;
+border-radius:20px;
+cursor:pointer;
+background:white;
+color:#ff4081;
+}
+
+/* confetti */
+.confetti{
+position:fixed;
+width:10px;
+height:10px;
+top:-10px;
+animation:fall 3s linear infinite;
+}
+
+@keyframes fall{
+to{
+transform:translateY(100vh) rotate(360deg);
+}
+}
+
+/* typing effect */
+.typing{
+font-size:30px;
+border-right:3px solid white;
+white-space:nowrap;
+overflow:hidden;
+width:0;
+animation:typing 3s steps(20,end) forwards;
+}
+
+@keyframes typing{
+to{width:200px;}
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<!-- butterflies -->
+<div class="butterfly" style="left:10%">🦋</div>
+<div class="butterfly" style="left:40%">🦋</div>
+<div class="butterfly" style="left:70%">🦋</div>
+
+<!-- balloons -->
+<div class="balloon" style="left:20%">🎈</div>
+<div class="balloon" style="left:50%">🎈</div>
+<div class="balloon" style="left:80%">🎈</div>
+
+<h2>🎮 Birthday Mini Game</h2>
+
+<div id="game">
+
+<p>Ready for a small birthday game?</p>
+
+<button onclick="wrong()">Yes 😄</button>
+<button onclick="q2()">Maybe 🤔</button>
+<button onclick="wrong()">No 😅</button>
+
+</div>
+
+<script>
+
+function wrong(){
+alert("❌ Wrong answer! Try again 😄");
+}
+
+function q2(){
+document.getElementById("game").innerHTML=
+"<p>Question 1: Today enna special day?</p>\
+<button onclick='wrong()'>Normal 🥱</button>\
+<button onclick='wrong()'>Birthday 🎂</button>\
+<button onclick='q3()'>Wednesday 😅</button>";
+}
+
+function q3(){
+document.getElementById("game").innerHTML=
+"<p>Question 2: Should we reveal the surprise?</p>\
+<button onclick='q4()'>Yes 👀</button>\
+<button onclick='wrong()'>No 🙈</button>";
+}
+
+function q4(){
+document.getElementById("game").innerHTML=
+"<p>Question 3: Do you like surprises?</p>\
+<button onclick='wrong()'>Yes 🤩</button>\
+<button onclick='q5()'>Maybe 😅</button>";
+}
+
+function q5(){
+document.getElementById("game").innerHTML=
+"<p>Final Question: Who created this surprise?</p>\
+<button onclick='reveal()'>Secret admirer 😉</button>\
+<button onclick='wrong()'>Google 🤣</button>";
+}
+
+function reveal(){
+
+document.getElementById("music").play();
+
+document.getElementById("game").innerHTML=
+"<h1>🎉 Happy Birthday 🎂</h1>\
+<div class='typing'>Juliet 💖</div>\
+<p>உங்க birthday ரொம்ப special ஆக இருக்கணும்.<br>\
+Happy Birthday 🎈 Enjoy your special day!</p>\
+<br>\
+<div class='panda'>🐼</div>\
+<br>\
+<button onclick='cutCake()'>🎂 Cut the Cake</button>";
+
+confettiBlast();
+}
+
+function cutCake(){
+alert("🎂 Cake cut! Happy Birthday Juliet 🎉");
+confettiBlast();
+}
+
+function confettiBlast(){
+for(let i=0;i<120;i++){
+let conf=document.createElement('div');
+conf.className='confetti';
+conf.style.left=Math.random()*100+'vw';
+conf.style.background='hsl('+Math.random()*360+'deg,100%,50%)';
+conf.style.animationDuration=(Math.random()*3+2)+'s';
+document.body.appendChild(conf);
+}
+}
+
+</script>
+
+</body>
+</html>
